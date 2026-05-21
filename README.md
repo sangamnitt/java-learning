@@ -77,3 +77,6 @@ mvn test
 - [Spring Boot Documentation](https://spring.io/projects/spring-boot)
 - [Spring Data JPA](https://spring.io/projects/spring-data-jpa)
 - [Java Concurrency Guide](https://docs.oracle.com/javase/tutorial/essential/concurrency/)
+
+## Load Testing using JMETER 
+jmeter -n -t <path>\LoadTest.jmx  -l <path>\LoadTestResult.csv
