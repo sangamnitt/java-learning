@@ -2,6 +2,7 @@ package com.example.controller;
 
 import com.example.entity.Task;
 import com.example.repository.TaskRepository;
+import com.example.service.TaskService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -9,6 +10,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
 
 @RestController
 @RequestMapping("/api/tasks")
@@ -16,10 +19,12 @@ import java.util.Optional;
 public class TaskController {
 
     private final TaskRepository taskRepository;
+    private final TaskService taskService;
 
     @GetMapping
-    public ResponseEntity<List<Task>> getAllTasks() {
-        return ResponseEntity.ok(taskRepository.findAll());
+    public CompletableFuture<ResponseEntity<List<Task>>> getAllTasks() {
+        return taskService.getAllTasks()
+                .thenApply(ResponseEntity::ok);
     }
 
     @GetMapping("/{id}")
