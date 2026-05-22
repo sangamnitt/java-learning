@@ -21,10 +21,15 @@ public class TaskController {
     private final TaskRepository taskRepository;
     private final TaskService taskService;
 
+//    @GetMapping
+//    public CompletableFuture<ResponseEntity<List<Task>>> getAllTasks() {
+//        return taskService.getAllTasks()
+//                .thenApply(ResponseEntity::ok);
+//    }
+
     @GetMapping
-    public CompletableFuture<ResponseEntity<List<Task>>> getAllTasks() {
-        return taskService.getAllTasks()
-                .thenApply(ResponseEntity::ok);
+    public ResponseEntity<List<Task>> getAllTasks() {
+        return ResponseEntity.ok(taskService.getAllTasks());
     }
 
     @GetMapping("/{id}")

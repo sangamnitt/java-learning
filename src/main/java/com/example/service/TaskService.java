@@ -7,8 +7,10 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
+import lombok.extern.slf4j.Slf4j;
 
 @Service
+@Slf4j
 public class TaskService {
     private final TaskRepository taskRepository;
 
@@ -16,14 +18,24 @@ public class TaskService {
         this.taskRepository = taskRepository;
     }
 
-    @Async("taskExecutor")
-    public CompletableFuture<List<Task>> getAllTasks() {
+//    @Async
+//    public CompletableFuture<List<Task>> getAllTasks() {
+//        log.info("Executing getAllTasks() in thread: {}", Thread.currentThread().getName());
+//        try {
+//            Thread.sleep(2000);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        } // Simulate long-running task
+//        return CompletableFuture.completedFuture(taskRepository.findAll());
+//    }
+
+    public List<Task> getAllTasks() {
+        log.info("Executing getAllTasks() in thread: {}", Thread.currentThread().getName());
         try {
             Thread.sleep(2000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         } // Simulate long-running task
-        return CompletableFuture.completedFuture(taskRepository.findAll());
+        return taskRepository.findAll();
     }
-
 }
